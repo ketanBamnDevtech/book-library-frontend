@@ -3,16 +3,46 @@ import { gql } from "@apollo/client";
 export const GET_ALL_BOOKS = gql`
 query AllBooks {
   allBooks {
-    books {
+      status
+      books {
+        id
+        title
+        author
+        date
+        avgRating
+        coverImage
+        createdAt
+        updatedAt
+      }
+  }
+}`;
+
+export const UPDATE_RATING_COLLECTIONS = gql`
+mutation AddToLibrary($bookId: String!, $userId: String!, $collect: String!, $rating: Int!) {
+  addToLibrary(input: {bookId: $bookId, userId: $userId, collect: $collect, rating: $rating}) {
+    status
+    myLibrary {
       id
-			title
-      author
-      date
-      coverImage
+      rating
       collect
-      createdAt
-      updatedAt
+      bookId {
+        id
+        title
+        author
+        date
+        coverImage
+        createdAt
+        updatedAt
+      }
+      userId {
+        id
+        name
+        email
+        photo
+        role
+        createdAt
+        updatedAt
       }
     }
-	}`
-;
+  }
+}`;

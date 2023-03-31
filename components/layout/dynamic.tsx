@@ -27,9 +27,6 @@ const DynamicLayout = ({ children, isPrivate = false }: LayoutProps) => {
     <section>
       <Header/>
       <div className="custom-container">{children}</div>
-      <footer>
-        Footer
-      </footer>
     </section>
   );
 };
