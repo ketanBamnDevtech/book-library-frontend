@@ -12,7 +12,7 @@ function Profile(props: any) {
   const dispatch = useAppDispatch();
 
   const { loading, data } = useQuery(GET_PROFILE, {
-    skip: !!userInfo.user,
+    skip: !!userInfo.user.id,
     onError: (error) => {
       console.log(error);
     },
