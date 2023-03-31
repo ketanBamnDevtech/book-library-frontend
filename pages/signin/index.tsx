@@ -22,6 +22,7 @@ import { setToken } from '@/store/slices/user.slice';
 import { useAppDispatch } from '@/hooks';
 import { set_cookie } from '@/utils/functions';
 
+import styles from '@/styles/login.module.css'
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -74,7 +75,9 @@ export default function SignIn() {
 
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } = formik;
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
+      <div className={styles.signinmain}>
+        
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -85,15 +88,16 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#1A0F07' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form"
+          <Box component="form" className={styles.signinbox}
             noValidate sx={{ mt: 1 }}>
-            <TextField
+            <TextField className={styles.inputfield}
+              style={{borderRadius:"50px"}}
               margin="normal"
               required
               fullWidth
@@ -108,7 +112,7 @@ export default function SignIn() {
               error={touched.email && errors.email ? true : false}
               helperText={touched.email && errors.email}
             />
-            <TextField
+            <TextField className={styles.inputfield}
               margin="normal"
               required
               fullWidth
@@ -127,7 +131,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-            <Button
+            <Button  className={styles.siginBTN}
               type="button"
               fullWidth
               variant="contained"
@@ -141,12 +145,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" className={styles.signinLink}> 
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link variant="body2"
+                <Link variant="body2" className={styles.signinLink}
                   onClick={() => {
                     router.push('/signup')
                   }}
@@ -159,6 +163,8 @@ export default function SignIn() {
         </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
+
+      </div>
     </ThemeProvider>
   );
 }

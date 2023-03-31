@@ -1,0 +1,42 @@
+.inputfield input {
+    border-radius: 5PX !important;
+    overflow: hidden;
+    background-color: #F4F1EA;
+    border: 1px solid #382110;
+
+}
+
+.siginBTN {
+    padding: 10px 10px !important;
+    background-color: #1A0F07;
+    border: 1px solid #1A0F07;
+    color: #F4F1EA;
+    border-radius: 50px;
+}
+.siginBTN:hover {
+    background-color: #382110;;
+    border-color: #382110;
+}
+.signinLink {
+    color: #1A0F07 !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+.signinbox
+{
+    background: #F4F1EA;
+    padding: 15px;
+    border-radius: 20px;
+
+}
+.signinmain
+{
+    background-image: url(https://media.istockphoto.com/id/671101136/photo/business-and-education-background.jpg?b=1&s=170667a&w=0&k=20&c=R4e4yhOo5_W_X2RvSab-eMmzp5KFIYZ6U3Z45IpEppo=);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: absolute;
+}

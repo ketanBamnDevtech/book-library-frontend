@@ -42,12 +42,6 @@ function Header() {
           <li>
             <Link href="/">My Book</Link>
           </li>
-          {/* <li>
-            <a href='#'>Browse</a>
-          </li> */}
-          {/* <li>
-            <a href='#'>Community</a>
-          </li> */}
         </ul>
         <div>
           <input type='text' className={styles.searchField} placeholder='Search here..'></input>
