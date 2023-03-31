@@ -1,6 +1,6 @@
- import React from 'react'
- import styles from '@/styles/Home3.module.css'
- 
+import React from 'react'
+import styles from '@/styles/Home3.module.css'
+
 import LinearProgress from '@mui/material/LinearProgress';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -9,7 +9,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import PersonIcon from '@mui/icons-material/Person';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+// import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,176 +17,164 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
- function MyBook() {
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import EditIcon from '@mui/icons-material/Edit';
+function MyBook() {
     const [value, setValue] = React.useState(2);
-   return (
-    <div>
-    <header className={styles.Navbar}>
-        <div className={styles.Toolbar}>
-            <div className={styles.Logo}>
-                {" "}
-                <span role="img" aria-label="logo" className={styles.logoname}>
-                    Good<strong>Reads</strong>
-                </span>{" "}
-            </div>
-            <ul>
-                <li>
-                    <a href='#'>Home</a>
-                </li>
-                <li>
-                    <a href='#'>My Books</a>
-                </li>
-                <li>
-                    <a href='#'>Browse</a>
-                </li>
-                <li>
-                    <a href='#'>Community</a>
-                </li>
-            </ul>
-            <div>
-                <input type='text' className={styles.searchField} placeholder='Search here..'></input>
-            </div>
-            <div className={styles.navright}>
-                <NotificationsIcon />
-                <MarkUnreadChatAltIcon />
-                <EmailIcon />
-                <Diversity3Icon />
-                <PersonIcon />
 
-            </div>
-        </div>
-    </header>
-    <div className={styles.mybookheader}>
-        <h1><a href="#">My Book</a></h1>
-        <hr></hr>
-    </div>
-    <Grid container spacing={5} className={styles.mainContainer}>
-       
-        <Grid item xs={4} className={styles.mybookleft}>
-            <h3 className={styles.lefttitle1}>Bookshelves <a href='#'>Edit</a></h3>
-            <div className={styles.leftCrad}>
-                
-                <div>
-                    <a href='#'>All (1)</a>
-                </div>
-                <div>
-                    <a href='#'>Read (1)</a>
-                </div>
-                <div>
-                    <a href='#'>Currently Reading (0)</a>
-                </div>
-                <div>
-                    <a href='#'>Want to Read (0)</a>
-                </div>
-            </div>
-            <hr></hr>
-            <div className={styles.leftCrad}>
-                
-                <div>
-                    <a href='#'>vishal (1)</a>
-                </div>
-                <div>
-                    <button></button>
-                </div>
+    function createData(name, calories, fat, carbs, protein) {
+        return { name, calories, fat, carbs, protein };
+    }
 
-            </div>
-            <h3 className={styles.lefttitle1}>2023 READING CHALLENGE</h3>
-            <div className={styles.leftCrad}>
-                <div className={styles.readingCard}>
-                    <div className={styles.icon}><ImportContactsIcon /></div>
-                    <div className={styles.readingChallengeMain}>
-                        <h2 className={styles.noofcount}>1</h2>
-                        <p>books completed</p>
-                        <span className={styles.track}>You’re on track!</span>
+    const rows = [
+        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+        createData('Eclair', 262, 16.0, 24, 6.0),
+        createData('Cupcake', 305, 3.7, 67, 4.3),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+    ];
+
+
+
+
+    return (
+        <div>
+            <header className={styles.Navbar}>
+                <div className={styles.Toolbar}>
+                    <div className={styles.Logo}>
+                        {" "}
+                        <span role="img" aria-label="logo" className={styles.logoname}>
+                            Good<strong>Reads</strong>
+                        </span>{" "}
+                    </div>
+                    <ul>
+                        <li>
+                            <a href='#'>Home</a>
+                        </li>
+                        <li>
+                            <a href='#'>My Books</a>
+                        </li>
+                        <li>
+                            <a href='#'>Browse</a>
+                        </li>
+                        <li>
+                            <a href='#'>Community</a>
+                        </li>
+                    </ul>
+                    <div>
+                        <input type='text' className={styles.searchField} placeholder='Search here..'></input>
+                    </div>
+                    <div className={styles.navleft}>
+                        <NotificationsIcon />
+                        <MarkUnreadChatAltIcon />
+                        <EmailIcon />
+                        <Diversity3Icon />
+                        <PersonIcon />
+
                     </div>
                 </div>
-
-                <div>
-
-                    <LinearProgress color="success" variant="determinate" value={10} />
-                </div>
-                <div>
-                    <a href='#' className={styles.Recommen}>View Challenge</a>
-                </div>
+            </header>
+            <div className={styles.mybookheader}>
+                <h1><a href="#">My Book</a></h1>
+                <hr></hr>
             </div>
-        </Grid>
-        <Grid item xs={8}>
-            <div className={styles.rightCard}>
-                <p>Welcome to Goodreads</p>
-                <p>Meet your favorite book, find your reading community, and manage your reading life.</p>
+            <Grid container spacing={5} className={styles.mainContainer}>
 
-            </div>
-            <div className={styles.bookcard}>
-                <Grid container spacing={1}>
+                <Grid item xs={2} className={styles.mybookleft}>
+                    <h3 className={styles.lefttitle1}>Bookshelves <a href='#'>Edit</a></h3>
+                    <div className={styles.leftCrad}>
 
-                    <Grid item xs={3} className={styles.bookimgmain}>
-                        <img src='https://images-na.ssl-images-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71-tsVwvG+L._AC_UL600_SR600,600_.jpg' className={styles.bookimg}></img>
-                    </Grid>
-                    <Grid item xs={9}>
-
-                        <p>Trending this week in one of your favorite genres, <a href="#" className={styles.Recommen}><strong>Graphic Novels</strong></a></p>
-                        <h3 className={styles.title}><a href="#" className={styles.Recommen}>Good-bye Stacey, Good-bye</a></h3>
-                        <a href='#'>by Gabriela Epstein</a>
-                        <Box className={styles.ratingBox}>
-                            <FormControl className={styles.readdropdown} mr={1}>
-                                <InputLabel id="demo-simple-select-label">Want to Read</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select">
-                                    <MenuItem value={10}>Want to Read</MenuItem>
-                                    <MenuItem value={20}>Currently Reading</MenuItem>
-                                    <MenuItem value={30}>Read</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <a href='#' mr={1}>Rate it:</a>
-                            <Rating
-                                name="simple-controlled"
-                                value={value}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue);
-                                }}
-                            />
-                        </Box>
-                        <p>Stacey McGill is moving back to New York! That means no more Stoneybrook Middle School, no more Charlotte Johanssen, and worst of all... no more Baby-sitters Club. Stacey's fr<a href="">…Continue reading</a></p>
-                    </Grid>
-                </Grid>
-            </div>
-
-
-        </Grid>
-            <div className={styles.rightCard1}>
-
-                <Grid container spacing={5}>
-
-                    <Grid item xs={6}>
-                        <h3 className={styles.lefttitle1}>WANT TO READ</h3>
-                        <div className={styles.leftCrad}>
-                            <div className={styles.readingCard}>
-                                <div className={styles.icon}><ImportContactsIcon /></div><p>What do you want to read next?
-                                </p></div>
-
-                            <div>
-                                <a href='#' className={styles.Recommen}>Recommendations</a>
-                            </div>
-                        </div>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <h3 className={styles.lefttitle1}>BOOKSHELVES</h3>
                         <div>
-                            <a href='#' className={styles.Recommen}>0 Want to Read</a>
-                        </div><div>
-                            <a href='#' className={styles.Recommen}>0 Currently Reading</a>
-                        </div><div>
-                            <a href='#' className={styles.Recommen}>0 Read</a>
+                            <a href='#'>All (1)</a>
                         </div>
-                    </Grid>
-                </Grid>
-            </div>
-    </Grid>
+                        <div>
+                            <a href='#'>Read (1)</a>
+                        </div>
+                        <div>
+                            <a href='#'>Currently Reading (0)</a>
+                        </div>
+                        <div>
+                            <a href='#'>Want to Read (0)</a>
+                        </div>
+                    </div>
+                    <hr></hr>
+                    <div className={styles.leftCrad}>
 
-</div >
-   )
- }
- 
- export default MyBook
+                        <div>
+                            <a href='#'>vishal (1)</a>
+                        </div>
+                        <div>
+                            <button className={styles.AddshelfBtn}>Add shelf</button>
+                        </div>
+
+                    </div>
+                </Grid>
+                <Grid item xs={10} className={styles.booktable}>
+                    <TableContainer component={Paper}>
+                        <Table  aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>
+cover</TableCell>
+                                    <TableCell align="left">	title</TableCell>
+                                    <TableCell align="left">	author</TableCell>
+                                    <TableCell align="left">avg rating</TableCell>
+                                    <TableCell align="left">rating</TableCell>
+                                    <TableCell align="left">shelves</TableCell>
+                                    <TableCell align="left">review</TableCell>
+                                    <TableCell align="left">date read</TableCell>
+                                    <TableCell align="left">date added</TableCell>
+                                    <TableCell align="left"></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow
+                                        key={row.name}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell align="left">       <img src='https://images-na.ssl-images-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71-tsVwvG+L._AC_UL600_SR600,600_.jpg' className={styles.bookimg}></img>
+                        </TableCell>
+                                        <TableCell align="left"><a href='#'>	
+Good-bye Stacey, Good-bye</a></TableCell>
+                                        <TableCell align="left"><a href='#'>	
+                                        Epstein, Gabriela *</a></TableCell>
+                                        <TableCell align="left">4.31</TableCell>
+                                        <TableCell align="left"> <Rating
+                                        name="simple-controlled"
+                                        value={value}
+                                        onChange={(event, newValue) => {
+                                            setValue(newValue ?? 0);
+                                        }}
+                                    /></TableCell>
+                                        <TableCell align="left">
+                                        <a href='#'>		
+read, dfgf
+<EditIcon /></a>
+                                        </TableCell>
+                                        <TableCell align="left"><a href='#'>Write a review</a></TableCell>
+                                        <TableCell align="left">not set<a href='#'><EditIcon /></a></TableCell>
+                                        <TableCell align="left">Mar 30, 2023</TableCell>
+                                        <TableCell align="left"><a href='#'><EditIcon /></a></TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+
+
+                </Grid>
+            </Grid>
+
+        </div >
+    )
+}
+
+export default MyBook

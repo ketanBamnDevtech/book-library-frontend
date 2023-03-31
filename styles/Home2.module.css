@@ -193,3 +193,61 @@ margin-bottom: 10px !important;
     align-items: center;
     margin-bottom: 20px;
   }
+  .landingbox {
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    transform: translate(-50%, 0%);
+    height: 250px;
+    background-color: #fff !important;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .landingbox hr {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .landingbanner {
+    float: left;
+    width: 100%;
+  }
+  .landing {
+    position: relative;
+  }
+  .landingTitle {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-top: 4px;
+    padding-bottom: 14px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .landingSignupBTN {
+    padding: 10px 10px !important;
+    background-color: #1A0F07;
+    border: 1px solid #382110;
+    color: #F4F1EA;
+    border-radius: 5px;
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+    text-transform: capitalize;
+  }
+  .landingbox p
+  {
+    text-transform: capitalize;
+    font-size: 12px;
+    text-align: center;
+    color: #a1a1a1;
+  }
+  .landingbox a {
+    color: #382110;
+    text-decoration: none !important;
+  }

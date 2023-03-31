@@ -22,6 +22,7 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/hooks';
 import { setUseProxies } from 'immer';
 
+import styles from '@/styles/login.module.css'
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -72,9 +73,11 @@ export default function SingUp() {
 
   return (
     <ThemeProvider theme={theme}>
+
+<div className={styles.signinmain}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
+        <Box 
           sx={{
             marginTop: 8,
             display: 'flex',
@@ -82,17 +85,17 @@ export default function SingUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: '#1A0F07' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate autoComplete='off'
+          <Box component="form" noValidate autoComplete='off' className={styles.signinbox}
             sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
+                <TextField className={styles.inputfield}
                   autoComplete="given-name"
                   name="name"
                   required
@@ -116,7 +119,7 @@ export default function SingUp() {
                 /> */}
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <TextField className={styles.inputfield}
                   required
                   fullWidth
                   id="email"
@@ -131,7 +134,7 @@ export default function SingUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <TextField className={styles.inputfield}
                   required
                   fullWidth
                   name="password"
@@ -147,7 +150,7 @@ export default function SingUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <TextField className={styles.inputfield}
                   required
                   fullWidth
                   name="passwordConfirm"
@@ -170,7 +173,7 @@ export default function SingUp() {
                 />
               </Grid> */}
             </Grid>
-            <Button
+            <Button className={styles.siginBTN}
               type="button"
               fullWidth
               variant="contained"
@@ -184,7 +187,7 @@ export default function SingUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link variant="body2"
+                <Link variant="body2" className={styles.signinLink}
                   onClick={() => {
                     router.push('/signin')
                   }}>
@@ -196,6 +199,7 @@ export default function SingUp() {
         </Box>
         {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
+      </div>
     </ThemeProvider>
   );
 }

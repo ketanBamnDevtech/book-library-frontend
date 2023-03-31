@@ -23,7 +23,7 @@ function HomePage() {
 
     const [value, setValue] = React.useState(2);
     return (
-        <div>
+        <div className={styles.landingWrapper}>
             <header className={styles.Navbar}>
                 <div className={styles.Toolbar}>
                     <div className={styles.Logo}>
@@ -114,8 +114,8 @@ function HomePage() {
                                 <h3 className={styles.title}><a href="#" className={styles.Recommen}>Good-bye Stacey, Good-bye</a></h3>
                                 <a href='#'>by Gabriela Epstein</a>
                                 <Box className={styles.ratingBox}>
-                                    <Form>
-                                        <FormControl className={styles.readdropdown} mr={1} >
+                                    {/* <Form> */}
+                                        <FormControl className={styles.readdropdown}>
                                             <InputLabel id="demo-simple-select-label">Want to Read</InputLabel>
                                             <Select
                                                 labelId="demo-simple-select-label"
@@ -125,9 +125,9 @@ function HomePage() {
                                                 <MenuItem value={30}>Read</MenuItem>
                                             </Select>
                                         </FormControl>
-                                    </Form>
+                                    {/* </Form> */}
 
-                                    <a href='#' mr={1}>Rate it:</a>
+                                    <a href='#'>Rate it:</a>
                                     <Rating
                                         name="simple-controlled"
                                         value={value}

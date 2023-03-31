@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import HomePage from './home/index'
 import styles from '@/styles/Home.module.css'
 import SignIn from './signin'
+import LandingPage from './landing'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,10 @@ function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-       <HomePage /> 
+       {/* <HomePage />  */}
+       <LandingPage />
+
+
       {/* <main className={styles.main}>
         <div className={styles.description}>
           <p>
@@ -123,7 +127,7 @@ function Home() {
         </div>
       </main> */}
 
-      <SignIn />
+      {/* <SignIn /> */}
     </>
   )
 }
