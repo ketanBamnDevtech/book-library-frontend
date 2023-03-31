@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,10 +11,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import API_URL from "../../config"
+// import API_URL from "../../config"
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik';
 import { signInSchema } from "../../utils/schema"
+import { SIGNIN_USER } from '@/gql/userQueries';
+import { useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
+import { setToken } from '@/store/slices/user.slice';
+import { useAppDispatch } from '@/hooks';
+import { set_cookie } from '@/utils/functions';
 
 function Copyright(props: any) {
   return (
@@ -34,14 +39,36 @@ const theme = createTheme();
 
 export default function SignIn() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const [loginUser, { loading, error, data }] = useMutation(SIGNIN_USER, {
+    onError: (error) => {
+      console.log(error);
+      // handle error here
+    },
+  });
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: signInSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      loginUser({ variables: { input: { ...values } } })
+        .then((result: any) => {
+          const { errors, data } = result;
+          if (errors?.name === "ApolloError") {
+            return toast.error(errors.message);
+          }
+          dispatch(setToken(data?.loginUser?.access_token))
+          set_cookie('token', data?.loginUser?.access_token)
+          router.push('/dashboard');
+        })
+        .catch((error) => {
+          console.log(error);
+        }
+      );
     },
   });
 
@@ -79,7 +106,7 @@ export default function SignIn() {
               onChange={handleChange}
               value={values.email}
               error={touched.email && errors.email ? true : false}
-              helperText={touched && errors.email}
+              helperText={touched.email && errors.email}
             />
             <TextField
               margin="normal"
@@ -94,7 +121,7 @@ export default function SignIn() {
               onBlur={handleBlur}
               value={values.password}
               error={touched.password && errors.password ? true : false}
-              helperText={touched && errors.password}
+              helperText={touched.password && errors.password}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -104,9 +131,10 @@ export default function SignIn() {
               type="button"
               fullWidth
               variant="contained"
+              disabled={loading}
               sx={{ mt: 3, mb: 2 }}
               onClick={(e: React.MouseEvent<HTMLElement>): void => {
-                handleSubmit
+                handleSubmit()
               }}
             >
               Sign In

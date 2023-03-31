@@ -16,7 +16,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import { signUpSchema } from "../../utils/schema"
 import { useQuery, useMutation } from '@apollo/client';
-import { SIGNUP_USER } from '../gql/userQueries';
+import { SIGNUP_USER } from '@/gql/userQueries';
+import { setUser } from '@/store/slices/user.slice';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from '@/hooks';
+import { setUseProxies } from 'immer';
 
 function Copyright(props: any) {
   return (
@@ -34,25 +38,38 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SingUp() {
-
   const router = useRouter();
-  const [signupUser, { loading, error, data }] = useMutation(SIGNUP_USER);
+  const dispatch = useAppDispatch();
+  const [signupUser, { loading, error, data }] = useMutation(SIGNUP_USER, {
+    onError: (error) => {
+      //handle error
+    },
+  });
 
-  
   const formik = useFormik({
     initialValues: {
       email: '',
       name: '',
       password: '',
-      confirmPassword: ''
+      passwordConfirm: ''
     },
     validationSchema: signUpSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values) => {
+        signupUser({ variables: { input: { ...values } } })
+        .then((result: any) => {
+          const { errors,data } = result;
+          if (errors?.name === "ApolloError") {
+            toast.error(errors.message);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });  
     },
   });
-  
-  const { values, touched, errors, handleChange, handleBlur } = formik;
+
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = formik;
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -72,7 +89,6 @@ export default function SingUp() {
             Sign up
           </Typography>
           <Box component="form" noValidate autoComplete='off'
-            // onSubmit={handleSubmit}
             sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -88,7 +104,7 @@ export default function SingUp() {
                   onChange={handleChange}
                   value={values.name}
                   error={touched.name && errors.name ? true : false}
-                  helperText={touched && errors.name}
+                  helperText={touched.name && errors.name}
                 />
 
                 {/* <TextField
@@ -111,7 +127,7 @@ export default function SingUp() {
                   onBlur={handleBlur}
                   value={values.email}
                   error={touched.email && errors.email ? true : false}
-                  helperText={touched && errors.email}
+                  helperText={touched.email && errors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -127,23 +143,23 @@ export default function SingUp() {
                   onBlur={handleBlur}
                   value={values.password}
                   error={touched.password && errors.password ? true : false}
-                  helperText={touched && errors.password}
+                  helperText={touched.password && errors.password}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="confirmPassword"
+                  name="passwordConfirm"
                   label="confirm Password"
                   type="password"
-                  id="confirmPassword"
+                  id="passwordConfirm"
                   autoComplete="new-password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.confirmPassword}
-                  error={touched.confirmPassword && errors.confirmPassword ? true : false}
-                  helperText={touched && errors.confirmPassword}
+                  value={values.passwordConfirm}
+                  error={touched.passwordConfirm && errors.passwordConfirm ? true : false}
+                  helperText={touched.passwordConfirm && errors.passwordConfirm}
                 />
               </Grid>
 
@@ -155,10 +171,14 @@ export default function SingUp() {
               </Grid> */}
             </Grid>
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
+              onClick={(e: React.MouseEvent<HTMLElement>): void => {
+                handleSubmit()
+              }}
             >
               Sign Up
             </Button>
