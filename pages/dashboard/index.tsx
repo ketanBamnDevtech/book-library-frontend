@@ -27,6 +27,7 @@ import { useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { useRouter } from 'next/router';
+import { Button } from '@mui/material';
 // import { Form } from 'formik';
 // import { setBooks } from '@/store/slices/book.slice';
 // import { useAppDispatch } from '@/hooks';
@@ -38,34 +39,33 @@ interface dashboardProps {
 function DashBoard({ data }: dashboardProps) {
   const { books } = data?.allBooks;
   const router = useRouter();
-  const [rating, setRating] = useState<number>(0);
   const [bookStatus, setBookStatus] = useState<string>("");
   const [bookId, setBookId] = useState<string>("");
   const userInfo: any = useSelector((state: RootState) => state.user);
+
+
   const [addToLibrary, { loading, error }] = useMutation(UPDATE_RATING_COLLECTIONS);
-
-  console.log('loading when adding books', loading, error)
-
   useEffect(() => {
-    if(bookId !== ""){
-      changeHandler(bookStatus, rating);
+    if (bookId !== "") {
+      changeHandler(bookStatus);
     }
-  }, [rating, bookStatus, bookId])
+  }, [bookStatus, bookId])
 
-  const changeHandler = (bookStatus: string, rating: number) => {
+  const changeHandler = (bookStatus: string) => {
     addToLibrary({
       variables: {
         bookId: bookId,
         userId: userInfo.user.id,
         collect: bookStatus,
-        rating: rating
+        rating: 0
       },
     }).then(data => {
-      console.log('after updating data ', data);
       // Handle success
+      router.push('/mybook')
+      refreshData()
     }).catch(error => {
-      console.error(error);
       // Handle error
+      console.error(error);
     });
   }
 
@@ -76,9 +76,8 @@ function DashBoard({ data }: dashboardProps) {
   return (
     <DynamicLayout isPrivate>
       <Grid container spacing={5} className={styles.mainContainer}>
-        <Grid item xs={4}>
-          <div className={styles.bookcard}>
-
+        {/* <Grid item xs={4}> */}
+        {/* <div className={styles.bookcard}>
             <Grid item xs={9}>
               <h3 className={styles.lefttitle1}>BOOKSHELVES</h3>
               <div>
@@ -89,10 +88,9 @@ function DashBoard({ data }: dashboardProps) {
                 <a href='#' className={styles.Recommen}>0 Read</a>
               </div>
             </Grid>
-            {/* </Grid> */}
-          </div>
-          {/* recommmendations  */}
-          {/* <h3 className={styles.lefttitle1}>CURRENTLY READING</h3>
+          </div> */}
+        {/* recommmendations  */}
+        {/* <h3 className={styles.lefttitle1}>CURRENTLY READING</h3>
           <div className={styles.leftCrad}>
             <div className={styles.readingCard}>
               <div className={styles.icon}><ImportContactsIcon /></div><p>What are you reading?</p></div>
@@ -107,8 +105,8 @@ function DashBoard({ data }: dashboardProps) {
           </div>
           <hr></hr> */}
 
-          {/* reading challanges */}
-          {/* <h3 className={styles.lefttitle1}>2023 READING CHALLENGE</h3>
+        {/* reading challanges */}
+        {/* <h3 className={styles.lefttitle1}>2023 READING CHALLENGE</h3>
           <div className={styles.leftCrad}>
             <div className={styles.readingCard}>
               <div className={styles.icon}><ImportContactsIcon /></div>
@@ -118,68 +116,51 @@ function DashBoard({ data }: dashboardProps) {
                 <span className={styles.track}>You’re on track!</span>
               </div>
             </div>
-
             <div>
-
               <LinearProgress color="success" variant="determinate" value={10} />
             </div>
             <div>
               <a href='#' className={styles.Recommen}>View Challenge</a>
             </div>
           </div> */}
-        </Grid>
+        {/* </Grid> */}
         <Grid item xs={8}>
           <div className={styles.rightCard}>
             <p>Welcome to Goodreads</p>
             <p>Meet your favorite book, find your reading community, and manage your reading life.</p>
-
           </div>
           {books?.map((book: any, index: number) => {
-            {console.log('book data', book )}
             return (
               <div className={styles.bookcard} key={book.id}>
                 <Grid container spacing={1}>
                   <Grid item xs={3} className={styles.bookimgmain}>
                     <img
-                      // src='https://images-na.ssl-images-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71-tsVwvG+L._AC_UL600_SR600,600_.jpg'
-                      src={"book-library-backend/src/uploads" + "/" + book.coverImage}
+                      src='https://images-na.ssl-images-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71-tsVwvG+L._AC_UL600_SR600,600_.jpg'
+                      // src={"book-library-backend/src/uploads" + "/" + book.coverImage}
                       className={styles.bookimg}></img>
                   </Grid>
 
-                  <Grid item xs={9} >
+                  <Grid item xs={6}>
                     {/* <p>Trending this week in one of your favorite genres, <a href="#" className={styles.Recommen}><strong>Graphic Novels</strong></a></p> */}
                     <h3 className={styles.title}><a href="#" className={styles.Recommen}>{book.title}</a></h3>
                     <a href='#'>by {book.author}</a>
-                    <Box className={styles.ratingBox}>
-                      <FormControl className={styles.readdropdown}>
-                        <InputLabel id="demo-simple-select-label">Select</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          value={book.collect}
-                          onChange={(event: any) => {
-                            const newStatus = event.target.value as string;
-                            setBookId(bookId)
-                            setBookStatus(newStatus);
-                          }}
-                        >
-                          <MenuItem value="WANT_TO_READ">Want to Read</MenuItem>
-                          <MenuItem value="READING">Currently Reading</MenuItem>
-                          <MenuItem value="READ">Read</MenuItem>
-                        </Select>
-                      </FormControl>
-                      <a href='#'>Rate it:</a>
+                    <Box className={styles.ratingBox} mt={3}>
+                      <Button variant="contained"
+                        color="success"
+                        onClick={() => {
+                          setBookId(book.id)
+                          setBookStatus("WANT_TO_READ");
+                        }}
+                      >
+                        Want to Read
+                      </Button>
+
                       <Rating
                         name="simple-controlled"
+                        readOnly
                         value={book.avgRating}
-                        onChange={(event, newValue) => {
-                          event.preventDefault();
-                          setBookId(book.id)
-                          setRating(newValue ?? 0);
-                        }}
-                      />
+                      /> {' '}{book.avgRating}
                     </Box>
-                    {/* <p>Stacey McGill is moving back to New York! That means no more Stoneybrook Middle School, no more Charlotte Johanssen, and worst of all... no more Baby-sitters Club. Stacey's fr<a href="">…Continue reading</a></p> */}
                   </Grid>
                 </Grid>
               </div>

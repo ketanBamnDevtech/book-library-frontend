@@ -46,3 +46,25 @@ mutation AddToLibrary($bookId: String!, $userId: String!, $collect: String!, $ra
     }
   }
 }`;
+
+export const MY_BOOKS_MUTATION = gql`
+  mutation MyBooks($userId: String!) {
+    myBooks(input: {userId: $userId}) {
+      status
+      myLibrary {
+        id
+        rating
+        collect
+        bookId {
+          id
+          title
+          author
+          date
+          coverImage
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;

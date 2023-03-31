@@ -1,3 +1,8 @@
+.mybookheader a,
+.lefttitle1 a {
+  color: #382110;
+}
+
 .Navbar {
   background: #F4F1EA;
   pointer-events: auto;
@@ -65,12 +70,35 @@
 }
 
 .mainContainer {
-  display: flex;
+  display: flex !important;
   max-width: 1200px;
-  margin-top: 60px !important;
+
+
+  margin: 0px auto !important;
+}
+
+.mybookheader {
+  margin-top: 100px !important;
   margin: 0 auto;
-  align-items: center !important;
-  justify-content: center;
+  max-width: 1200px;
+}
+
+.mybookleft {
+  padding: 0px !important;
+}
+
+.mybookleft .leftCrad a {
+  margin-bottom: 10px;
+  color: #382110;
+  display: block;
+}
+
+.AddshelfBtn {
+  padding: 5px 10px;
+  background-color: #382110;
+  border: 1px solid #F4F1EA;
+  border-radius: 5px;
+  color: #F4F1EA;
 }
 
 .lefttitle1 {
@@ -149,7 +177,7 @@
 .rightCard,
 .bookcard,
 .rightCard1 {
-  /* width: 80%; */
+  width: 90%;
   padding: 15px !important;
   background-color: #fff !important;
   border: 1px solid #ccc;
@@ -170,20 +198,9 @@
 
 .navright svg {
   padding: 5px;
-  position: relative;
-  right: -500px;
   margin: 0 5px;
   color: #382110;
   cursor: pointer;
-}
-
-.navUser {
-  padding: 5px;
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  color: #382110;
-  cursor: pointer; 
 }
 
 .bookimgmain {
@@ -192,7 +209,7 @@
 }
 
 .bookimg {
-  width: 100%;
+  width: 100px;
 }
 
 .rightCard h3,
@@ -217,14 +234,15 @@
   color: #382110;
 }
 
-.readdropdown {
+/* .readdropdown {
   width: 300px !important;
   margin-top: 15px;
-}
+} */
 
-.myreaddropdown {
-  width: 15px !important;
-  margin-top: 15px;
+.myBookReadDropdown {
+  width: 100px !important;
+  height: 30px;
+  top: -3px;
 }
 
 .ratingBox {
@@ -234,73 +252,45 @@
   margin-bottom: 20px;
 }
 
-.landingbox {
-  width: 300px;
-  position: absolute;
-  right: 0;
-  top: 70px;
-  transform: translate(-50%, 0%);
-  height: 250px;
-  background-color: #fff !important;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+.booktable {
+  padding-top: 0px !important;
 }
 
-.landingbox hr {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.landingbanner {
-  float: left;
-  width: 100%;
-}
-
-.landing {
-  position: relative;
-}
-
-.landingTitle {
-  margin-bottom: 10px;
-  font-size: 18px;
-  padding-top: 4px;
-  padding-bottom: 14px;
-  text-align: center;
-  text-transform: capitalize;
-}
-
-.landingSignupBTN {
-  padding: 10px 10px !important;
-  background-color: #1A0F07;
-  border: 1px solid #382110;
-  color: #F4F1EA;
-  border-radius: 5px;
-  width: 70%;
-  margin: 0 auto;
-  display: block;
-  text-transform: capitalize;
-}
-
-.landingbox p {
-  text-transform: capitalize;
-  font-size: 12px;
-  text-align: center;
-  color: #a1a1a1;
-}
-
-.landingbox a {
+.booktable a {
   color: #382110;
   text-decoration: none !important;
 }
 
-.readButton {
-  margin: 10px 10px !important;
-  padding: 10px 10px;
-  color: white;
-  background-color: greenyellow;
+.booktable table td,
+.booktable table th {
+  padding: 5px;
+  font-size: 13px !important;
+}
+
+.booktable table {
+  border-color: #F4F1EA;
+}
+
+.booktable table th {
+  background-color: #F4F1EA !important;
+  color: #382110;
+}
+
+.booktable table tr:hover {
+
+  background-color: #F4F1EA !important;
+}
+
+.booktable a svg {
+  font-size: 14px;
+  margin-left: 5px !important;
+}
+
+.booktable table td span {
+  font-size: 12px !important;
+}
+
+.booktable table th {
+  text-transform: capitalize;
+  font-weight: 700;
 }

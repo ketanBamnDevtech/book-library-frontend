@@ -105,7 +105,6 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
@@ -145,9 +144,9 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" className={styles.signinLink}> 
+                {/* <Link href="#" variant="body2" className={styles.signinLink}> 
                   Forgot password?
-                </Link>
+                </Link> */}
               </Grid>
               <Grid item>
                 <Link variant="body2" className={styles.signinLink}

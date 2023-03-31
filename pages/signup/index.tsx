@@ -40,7 +40,6 @@ const theme = createTheme();
 
 export default function SingUp() {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const [signupUser, { loading, error, data }] = useMutation(SIGNUP_USER, {
     onError: (error) => {
       //handle error
@@ -102,7 +101,6 @@ export default function SingUp() {
                   fullWidth
                   id="name"
                   label="Full Name"
-                  autoFocus
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.name}

@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import thunk from "redux-thunk";
-import config from "../config"
+// import config from "../config"
 import userSlice from './slices/user.slice';
 import bookSlice from './slices/book.slice';
 
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 const store = configureStore({
     reducer: rootReducer,
     middleware: [thunk],
-    devTools: config.ENVIROMENT === "dev",
+    devTools: process.env.NEXT_PUBLIC_ENVIROMENT === "dev",
 })
 
 export default store;
